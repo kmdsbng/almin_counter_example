@@ -1,7 +1,11 @@
 "use strict";
 
-export default class CounterState {
-  constructor({ count }) {
+export interface CounterState {
+  count: number;
+};
+
+export class CounterState {
+  constructor({ count}) {
     this.count = count;
   }
 

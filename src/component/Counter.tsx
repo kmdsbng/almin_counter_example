@@ -1,11 +1,22 @@
 "use strict";
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 import { Context } from "almin";
-import CounterState from "../store/CounterState";
+import { CounterStore } from "../store/CounterStore";
+import { CounterState } from "../store/CounterState";
 import IncrementalCounterUseCase from "../usecase/IncrementalCounterUseCase";
 
-export default class CounterComponent extends React.Component {
+// copy from almin/UILayer/StoreGroupTypes"
+declare type StateMap<T> = {
+    [P in keyof T]: T[P];
+};
+
+export interface CounterComponentProps {
+  appContext: Context<StateMap<{ "counter": any; }>>;
+  counterState: CounterState;
+};
+
+export default class CounterComponent extends React.Component<CounterComponentProps, undefined> {
   constructor(props) {
     super(props);
   }
@@ -28,7 +39,3 @@ export default class CounterComponent extends React.Component {
   }
 }
 
-CounterComponent.propTypes = {
-  appContext: PropTypes.instanceOf(Context).isRequired,
-  counterState: PropTypes.instanceOf(CounterState).isRequired
-};

@@ -1,7 +1,8 @@
 "use strict";
-import React from "react";
+import * as React from "react";
 import { Context, Dispatcher, StoreGroup } from "almin";
 import { CounterStore } from "../store/CounterStore";
+import { CounterState } from "../store/CounterState";
 import Counter from "./Counter";
 
 const dispatcher = new Dispatcher();
@@ -17,7 +18,14 @@ const appContext = new Context({
   store: storeGroup
 });
 
-export default class App extends React.Component {
+export interface AppProps {
+};
+
+export interface AppState {
+  counter: CounterState;
+};
+
+export default class App extends React.Component<AppProps, AppState> {
   constructor(...args) {
     super(...args);
     this.state = appContext.getState();
